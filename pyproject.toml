@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "auto-econ-agent"
+version = "0.1.0"
+description = ""
+authors = ["Shiv <shivanshityagi@icloud.com>"]
+readme = "README.md"
+packages = [{include = "auto_econ_agent"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain = "^0.0.118"
+web3 = "^6.0.0"
+python-dotenv = "^1.0.0"
+openai = "^0.27.2"
+google-search-results = "^2.4.2"
+
+[tool.poetry.scripts]
+app = "auto_econ_agent.__init__:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
