@@ -6,7 +6,6 @@ from langchain.agents import Tool, initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 
-# from .custom_zero_shot_agent import CustomZeroShotAgent
 from .ens_tool import EnsTool
 from .wallet import Wallet
 from .sign import Sign
@@ -32,7 +31,10 @@ def initialize_tools():
     search = SerpAPIWrapper(search_engine="google",
                             serpapi_api_key=os.environ.get("SERPAPI_API_KEY"))
     ens_chain = EnsTool(
-        name="ENS", description="Resolves ENS names to valid ethereum addresses or returns UNRESOLVED if the name is not found")
+        name="ENS",
+        description="Resolves ENS names to valid ethereum addresses or returns UNRESOLVED if the name is not found"
+    )
+
     requests = RequestsWrapper()
     ethereum_rpc = Wallet(
         name="Ethereum RPC", description="Useful for interacting with Ethereum nodes using JSON-RPC")

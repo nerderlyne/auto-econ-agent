@@ -1,4 +1,3 @@
-import asyncio
 from langchain.tools import BaseTool
 from web3 import HTTPProvider
 from ens import ENS
@@ -8,10 +7,7 @@ ns = ENS(provider)
 
 
 class EnsTool(BaseTool):
-    name = "ENS Resolver"
-    description = "Resolves an ENS name to its corresponding address"
-
-    async def resolve_ens_name(self, query: str):
+    def resolve_ens_name(self, query: str):
         try:
             address = ns.address(query)
             if address:
@@ -22,8 +18,7 @@ class EnsTool(BaseTool):
             return 'UNRESOLVED'
 
     def _run(self, query: str) -> str:
-        loop = asyncio.get_event_loop()
-        return loop.run_until_complete(self._arun(query))
+        return self.resolve_ens_name(query)
 
-    async def _arun(self, query: str) -> str:
-        return await self.resolve_ens_name(query)
+    def _arun(self) -> str:
+        return NotImplemented("Not Supported")
